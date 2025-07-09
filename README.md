@@ -102,4 +102,4 @@ Set these in a `.env` file or your environment:
 See `example.env` for a template.
 
 ### Troubleshooting
-- For debugging, set `EMPOWER_HEADLESS=false` to watch the browser interactively. 
+- For debugging, set `EMPOWER_HEADLESS=false` to watch the browser interactively. You _need_ to do this the first time for 2FA.
