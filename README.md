@@ -3,18 +3,23 @@
 Automates PDF form filling and uploading to Empower Retirement, primarily for in-service distributions to convert/rollover after-tax contributions to Roth.
 
 ## Setup
+
+Software required:
 - Python 3
 - [uv](https://github.com/astral-sh/uv)
 
 ```sh
-uv venv
-uv pip install -r requirements.txt
+brew install python3 uv
 ```
 
-Once (though you might want to update every once in a while):
+Once cloned, inside the directory:
 ```sh
+uv venv
+uv pip install -r requirements.txt
 uv run playwright install
 ```
+
+You might want to update the above every once in a while.
 
 ## Execute
 - Look at `example.sh` for a one-click solution, modify as you see fit.
