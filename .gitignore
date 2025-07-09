@@ -1,4 +1,5 @@
 *.pdf
+browser_persist/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

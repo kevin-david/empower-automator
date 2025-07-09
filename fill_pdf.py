@@ -2,6 +2,8 @@ import sys
 from datetime import datetime
 try:
     import pypdf
+    from pypdf.generic import NameObject
+    from pypdf.generic import ArrayObject
 except ImportError:
     print("Error: The 'pypdf' library is not installed. Did you use `uv run`?")
     sys.exit(1)
@@ -126,9 +128,9 @@ def main() -> None:
         except Exception as e:
             print(f"Failed to update field on page {i}: {e}")
             continue
-    
-    with open(args.output_pdf, "wb") as output_stream:
-        writer.write(output_stream)
+
+        with open(args.output_pdf, "wb") as output_stream:
+            writer.write(output_stream)
     
     print(f"Successfully created '{args.output_pdf}' with date '{final_date_string}' in field '{args.field}'")
 
