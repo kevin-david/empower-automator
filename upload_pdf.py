@@ -38,27 +38,33 @@ async def run():
         )
         page = browser.pages[0] if browser.pages else await browser.new_page()
         await page.goto(TARGET_URL)
-        await page.wait_for_load_state('networkidle')
 
         # --- LOGIN ---
+        print(f"[INFO] Logging in as {USERNAME}")
         await page.fill("#usernameInput", USERNAME)
-        await page.fill( "#passwordInput", PASSWORD)
+        await page.fill("#passwordInput", PASSWORD)
         await page.click("#submit")
-        await page.wait_for_load_state('networkidle')
 
         # --- NAVIGATE TO UPLOAD PAGE ---
         await page.click('[data-testid="uploadDocument"]')
 
         # --- UPLOAD PDF ---
+        print(f"[INFO] Uploading PDF: {PDF_PATH}")
         await page.select_option('#fileUploadCategory', label="Incoming rollovers")
         await page.wait_for_selector('input[type="file"]', state='attached')
         await page.set_input_files('input[type="file"]', PDF_PATH)
         await page.click("button#submit")
-        await page.wait_for_load_state('networkidle')
+        await page.wait_for_selector("text=Document preview", timeout=15000)
+        await page.click("button:has-text('Accept')")
 
-        print("[INFO] Script completed. Please update selectors and steps as needed.")
-        #await browser.close()
-        await asyncio.sleep(1000000)
+        # --- WAIT FOR UPLOAD TO COMPLETE ---
+        await page.wait_for_selector("text=Document upload confirmation", timeout=30000)
+
+        print("[INFO] Script completed.")
+        if not HEADLESS:
+            print("[INFO] Headless mode is off. Waiting 5 seconds for verification or manual review...")
+            await asyncio.sleep(5)
+        await browser.close()
 
 if __name__ == "__main__":
     asyncio.run(run())
