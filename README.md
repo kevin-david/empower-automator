@@ -7,6 +7,7 @@ Automates PDF form filling and uploading to Empower Retirement, primarily for in
 - [uv](https://github.com/astral-sh/uv)
 
 ```sh
+uv venv
 uv pip install -r requirements.txt
 ```
 

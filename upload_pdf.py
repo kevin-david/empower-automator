@@ -20,8 +20,19 @@ if len(sys.argv) < 2:
     sys.exit(1)
 
 PDF_PATH = sys.argv[1]  # PDF path is required as first argument
+if not os.path.isfile(PDF_PATH):
+    print(f"Error: PDF file '{PDF_PATH}' does not exist or is not a file.")
+    sys.exit(1)
+
 USERNAME = os.getenv("EMPOWER_USERNAME")  # Set in .env
+if not USERNAME:
+    print("Error: EMPOWER_USERNAME environment variable is not set. Please set it in your .env file or environment.")
+    sys.exit(1)
+
 PASSWORD = os.getenv("EMPOWER_PASSWORD")  # Set in .env
+if not PASSWORD:
+    print("Error: EMPOWER_PASSWORD environment variable is not set. Please set it in your .env file or environment.")
+    sys.exit(1)
 HEADLESS = os.getenv("EMPOWER_HEADLESS", "true").lower() == "true"
 
 UPLOAD_INPUT_SELECTOR = "input[type='file']"         # Example
