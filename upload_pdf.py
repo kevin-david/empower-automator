@@ -73,8 +73,8 @@ async def run():
 
         print("[INFO] Script completed.")
         if not HEADLESS:
-            print("[INFO] Headless mode is off. Waiting 5 seconds for verification or manual review...")
-            await asyncio.sleep(5)
+            print("[INFO] Headless mode is off. Waiting 30 seconds for verification or manual review...")
+            await asyncio.sleep(30)
         await browser.close()
 
 if __name__ == "__main__":
