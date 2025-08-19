@@ -56,6 +56,14 @@ async def run():
         await page.fill("#passwordInput", PASSWORD)
         await page.click("#submit")
 
+        # Check if "Two step authentication" is shown and wait if it appears
+        try:
+            await page.wait_for_selector("text=Two step authentication", timeout=5000)
+            print("[INFO] Two step authentication detected. Waiting 3 minutes for completion. Control-C to stop once done, and rerun the script.")
+            await asyncio.sleep(3 * 60 * 1000)  # Wait 3 minutes
+        except:
+            print("[INFO] No two step authentication required, continuing...")
+
         # --- NAVIGATE TO UPLOAD PAGE ---
         await page.click('[data-testid="uploadDocument"]')
 
